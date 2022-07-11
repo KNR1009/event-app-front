@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { UserInfo } from "../../../types";
+import axios from "axios";
 
 export const SignUp = () => {
   const [name, setName] = useState<string>("");
@@ -14,6 +15,25 @@ export const SignUp = () => {
     setState: React.Dispatch<React.SetStateAction<string>>
   ) => {
     setState(e.target.value);
+  };
+
+  const onClick = () => {
+    const params = {
+      name: name,
+      email: email,
+      password: password,
+      passwordConfirmation: passwordConfirmation,
+      imageUrl: imageUrl,
+    };
+    console.log("aaa");
+    axios
+      .post("http://127.0.0.1:3000/auth/", params)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <InputContainer>
@@ -68,7 +88,9 @@ export const SignUp = () => {
           value={imageUrl}
         />
       </div>
-      <button className="button">新規登録</button>
+      <button className="button" onClick={onClick}>
+        新規登録
+      </button>
     </InputContainer>
   );
 };
