@@ -31,7 +31,7 @@ export const Login: React.FC = () => {
         // header情報をRecoilに定義
         const headers: UserState = {
           accessToken: res.headers["access-token"],
-          client: res.headers["X-j7nh4HjIqO3RJx1Dt0uA"],
+          client: res.headers["client"],
           uid: res.headers["uid"],
         };
         setUser(headers);
